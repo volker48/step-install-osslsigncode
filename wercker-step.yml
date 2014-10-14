@@ -1,0 +1,3 @@
+name: install-osslsigncode
+version: 0.0.1
+description: Downloads, compiles, and installs osslsigncode
