@@ -4,9 +4,12 @@ if [ "$OSSLSIGNCODE_VERSION" == "osslsigncode 1.7.1" ]
     echo "osslsigncode already installed nothing to do"
     exit 0
 fi
-curl -o $WERCKER_CACHE_DIR/osslsigncode.tar.gz "http://hivelocity.dl.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz"
-mkdir -p $WERCKER_CACHE_DIR/osslsigncode-build
-tar -xf $WERCKER_CACHE_DIR/osslsigncode.tar.gz --strip=1 -C $WERCKER_CACHE_DIR/osslsigncode-build
+if [ ! -d "$WERCKER_CACHE_DIR/osslsigncode-build" ]
+  then
+    curl -o $WERCKER_CACHE_DIR/osslsigncode.tar.gz "http://hivelocity.dl.sourceforge.net/project/osslsigncode/osslsigncode/osslsigncode-1.7.1.tar.gz"
+    mkdir -p $WERCKER_CACHE_DIR/osslsigncode-build
+    tar -xf $WERCKER_CACHE_DIR/osslsigncode.tar.gz --strip=1 -C $WERCKER_CACHE_DIR/osslsigncode-build
+fi
 sudo apt-get update
 sudo apt-get install -y openssl autoconf libcurl4-openssl-dev libssl-dev
 cd $WERCKER_CACHE_DIR/osslsigncode-build
